@@ -1,0 +1,70 @@
+please do
+
+$output = open file "output.txt" in usrstuff for writing;
+
+print on $output "The program assumes both pdb files start with the same aminoacid. Please check for hydrogens.";
+print on $output "Below are the RMSD values residue by residue";
+
+$wildtypeall = groupcount of "wildtype";
+$mutatedall = groupcount of "mutated";
+$wildtypeamino = select in "wildtype" aa;
+select $wildtypeamino;
+$wildtypeamino2 = selcount of "wildtype";
+$mutatedamino = select in "mutated" aa;
+select $mutatedamino;
+$mutatedamino2 = selcount of "mutated";
+
+$minresiduecount = 0;
+if ($wildtypeamino2 <= $mutatedamino2) 
+{
+$minresiduecount = $wildtypeamino2;
+} 
+else 
+{
+$minresiduecount = $mutatedamino2;
+}
+$cap = 2*($minresiduecount+-1);
+
+$i = 0;
+$j = 0;
+
+do
+{
+	$SELwildtype = select in "wildtype" pos $i;
+
+	$SELmutated = select in "mutated" pos $j;
+	
+	select $SELwildtype;
+
+	select $SELmutated;
+
+	$RMSD = rms of "wildtype" and "mutated" using "CA";
+
+	print on $output $RMSD;
+	
+} while (++$i + ++$j <= $cap);
+
+print on $output "RMSD";
+print on $output "Copy/paste all the input until here to the appropriate column.";
+
+
+
+print on $output "Groupcount of wildtype is:";
+print on $output $wildtypeall;
+print on $output "Groupcount of mutated is:";
+print on $output $mutatedall;
+print on $output "If the two preceding values are not the same than you have OXT (oxygen) and hydrogen atoms either in the end or beginning. Proceed with caution";
+
+select in "wildtype" aa;
+select in "mutated" aa; 
+
+$RMSDoverall = rms of "wildtype" and "mutated" using "CA";
+
+print on $output "Overall RMSD is:";
+print on $output $RMSDoverall;
+print on $output "Please copy paste the value above in the appropriate cell";
+print on $output "Thank you.";
+
+close file $output;
+
+thank you

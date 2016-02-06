@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>D3 Test</title>
+
+        <script type="text/javascript" src="d3/d3.v3.js"></script>
+
+		<style type ="text/css">
+
+			div.bar {
+
+				display: inline-block;
+
+				width: 20px;
+
+				height: 75px;
+
+				background-color: teal;
+
+				margin-right: 2px;
+
+			}
+
+			
+
+			.axis path,
+
+			.axis line {
+
+				fill: none;
+
+				stroke: gray;
+
+				shape-rendering: crispEdges;
+
+				}
+
+			.axis text {
+
+				stroke: gray;
+
+				font-family: sans-serif;
+
+				font-size: 11px;
+
+			}
+
+		</style>
+
+    </head>
+
+    <body>
+
+        <script type="text/javascript">
+
+			var w = 1366;
+
+			var h = 768;
+
+			var padding = 300;
+
+			var svg = d3.select("body").append("svg").attr("height", h).attr("width",w);
+
+var dataset_score = [['0', 'M', 'A', '0.0', '0'], ['0', 'H', 'A', '0.0', '0'], ['0', 'H', 'I', '0.0', '0'], ['0', 'Q', 'G', '0.0', '0'], ['0', 'G', 'R', '0.0', '0'], ['0', 'R', 'A', '0.0', '0'], ['0', 'K', 'S', '0.0', '0'], ['0', 'R', 'F', '0.0', '0'], ['0', 'V', 'V', '0.0', '0'], ['0', 'C', 'I', '0.0', '0'], ['0', 'M', 'S', '2.0', '0'], ['0', 'G', 'A', '1.5', '0'], ['0', 'R', 'S', '0.5', '0'], ['0', 'K', 'L', '0.0', '0'], ['0', 'A', 'L', '4.0', '0'], ['0', 'F', 'L', '6.0', '0'], ['8', 'C', 'G', '7.5', '0'], ['9', 'C', 'Y', '6.0', '0'], ['0', 'V', 'V', '6.5', '0'], ['0', 'A', 'L', '10.5', '0'], ['0', 'G', 'A', '2.5', '0'], ['0', 'H', 'T', '0.5', '0'], ['0', 'G', 'E', '0.0', '0'], ['0', 'E', 'S', '0.0', '0'], ['0', 'V', 'A', '5.0', '0'], ['0', 'D', 'H', '4.5', '0'], ['0', 'H', 'E', '3.5', '0'], ['0', 'A', 'E', '5.5', '0'], ['0', 'Y', 'Y', '7.5', '1'], ['8.66666666666667', 'V', 'A', '11.0', '1'], ['0', 'A', 'V', '11.0', '1'], ['1', 'Y', 'E', '11.0', '1'], ['1', 'H', 'P', '8.0', '1'], ['8.33333333333333', 'S', 'I', '6.0', '1'], ['0', 'L', 'S', '10.0', '1'], ['0', 'L', 'N', '7.0', '1'], ['0', 'P', 'L', '8.0', '1'], ['8.33333333333333', 'A', 'L', '4.5', '1'], ['0', 'I', 'S', '8.0', '1'], ['0', 'R', 'Q', '8.0', '1'], ['1', 'E', 'A', '9.5', '1'], ['1', 'L', 'E', '9.5', '1'], ['1', 'L', 'M', '7.0', '1'], ['0', 'N', 'Q', '6.0', '1'], ['1', 'N', 'L', '11.0', '1'], ['1', 'D', 'I', '10.0', '1'], ['1', 'Y', 'E', '10.0', '1'], ['0', 'Q', 'Q', '8.5', '1'], ['0', 'V', 'M', '7.0', '1'], ['0', 'T', 'A', '7.5', '1'], ['0', 'A', 'Q', '9.5', '1'], ['0', 'K', 'D', '6.0', '1'], ['0', 'V', 'Q', '7.0', '1'], ['0', 'I', 'I', '11.0', '1'], ['0', 'V', 'F', '11.0', '1'], ['0', 'P', 'E', '11.0', '1'], ['1', 'D', 'G', '11.0', '1'], ['1', 'I', 'H', '10.5', '1'], ['1', 'G', 'F', '11.0', '1'], ['1', 'N', 'F', '11.0', '1'], ['1', 'T', 'R', '10.0', '1'], ['1', 'T', 'S', '11.0', '1'], ['0', 'I', 'Y', '8.5', '1'], ['1', 'P', 'F', '8.0', '1'], ['0', 'L', 'D', '10.0', '1'], ['1', 'F', 'M', '6.5', '1'], ['0', 'P', 'S', '9.0', '1'], ['1', 'P', 'Q', '8.5', '1'], ['0', 'V', 'V', '4.5', '1'], ['9', 'R', 'W', '8.5', '1'], ['9', 'N', 'P', '11.0', '1'], ['9', 'C', 'L', '11.0', '1'], ['9.33333333333333', 'E', 'P', '11.0', '1'], ['9.33333333333333', 'H', 'R', '8.0', '1'], ['9', 'F', 'N', '9.0', '1'], ['9', 'D', 'T', '9.5', '1'], ['0', 'E', 'V', '11.0', '1'], ['1', 'L', 'Q', '11.0', '1'], ['1', 'R', 'L', '9.5', '1'], ['1', 'S', 'C', '11.0', '1'], ['0', 'M', 'A', '11.0', '1'], ['0', 'I', 'R', '7.0', '1'], ['0', 'G', 'D', '5.0', '1'], ['0', 'M', 'F', '9.0', '1'], ['1', 'L', 'V', '11.0', '1'], ['1', 'A', 'N', '11.0', '1'], ['1', 'L', 'G', '9.5', '1'], ['1', 'T', 'K', '7.0', '1'], ['1', 'E', 'P', '9.5', '1'], ['1', 'C', 'H', '6.5', '1'], ['0', 'S', 'S', '8.5', '1'], ['9', 'D', 'P', '6.5', '1'], ['9', 'R', 'C', '7.5', '1'], ['0', 'P', 'K', '7.0', '1'], ['1', 'D', 'G', '11.0', '1'], ['0', 'R', 'Y', '10.5', '1'], ['1', 'Q', 'F', '11.0', '1'], ['1', 'N', 'T', '11.0', '1'], ['1', 'N', 'V', '11.0', '1'], ['1', 'V', 'F', '9.5', '1'], ['0', 'S', 'N', '6.5', '1'], ['1', 'N', 'G', '9.5', '1'], ['1', 'T', 'L', '8.5', '1'], ['0', 'V', 'D', '8.0', '1'], ['1', 'R', 'Y', '11.0', '1'], ['1', 'R', 'K', '9.5', '1'], ['0', 'H', 'N', '9.5', '1'], ['1', 'L', 'Y', '11.0', '1'], ['1', 'F', 'E', '11.0', '1'], ['1', 'A', 'A', '7.5', '1'], ['1', 'F', 'D', '11.0', '1'], ['0', 'V', 'P', '8.5', '1'], ['1', 'L', 'K', '5.0', '1'], ['0', 'V', 'D', '8.0', '1'], ['1', 'L', 'I', '5.5', '1'], ['1', 'T', 'F', '9.0', '1'], ['1', 'D', 'T', '11.0', '1'], ['1', 'P', 'F', '11.0', '1'], ['1', 'A', 'G', '11.0', '1'], ['1', 'R', 'F', '10.0', '1'], ['0', 'G', 'I', '9.5', '1'], ['1', 'F', 'T', '9.5', '1'], ['0', 'C', 'F', '11.0', '1'], ['1', 'D', 'I', '11.0', '1'], ['0', 'L', 'F', '11.0', '1'], ['0', 'F', 'D', '8.0', '1'], ['0', 'P', 'A', '9.0', '1'], ['1', 'I', 'R', '7.0', '1'], ['0', 'V', 'L', '9.0', '1'], ['0', 'R', 'D', '5.0', '1'], ['0', 'Y', 'K', '3.0', '1'], ['1', 'V', 'K', '10.0', '1'], ['1', 'H', 'V', '7.5', '1'], ['1', 'V', 'Y', '8.0', '1'], ['1', 'P', 'T', '9.0', '1'], ['1', 'A', 'W', '11.0', '1'], ['1', 'M', 'N', '11.0', '1'], ['1', 'Q', 'L', '11.0', '1'], ['1', 'P', 'L', '11.0', '1'], ['0', 'L', 'A', '8.0', '1'], ['1', 'A', 'I', '9.0', '1'], ['0', 'E', 'I', '8.0', '1'], ['1', 'Q', 'K', '10.0', '1'], ['1', 'A', 'F', '10.5', '1'], ['1', 'A', 'V', '7.0', '1'], ['1', 'A', 'F', '8.5', '1'], ['0', 'G', 'I', '7.5', '1'], ['0', 'N', 'V', '9.5', '1'], ['0', 'L', 'A', '11.0', '1'], ['0', 'A', 'N', '11.0', '1'], ['0', 'V', 'H', '8.5', '1'], ['8.66666666666667', 'H', 'P', '5.5', '1'], ['0', 'V', 'L', '8.0', '1'], ['0', 'G', 'M', '9.0', '1'], ['0', 'T', 'G', '11.0', '1'], ['0', 'S', 'G', '11.0', '1'], ['1', 'I', 'H', '9.5', '1'], ['1', 'T', 'P', '11.0', '1'], ['1', 'L', 'E', '6.0', '1'], ['1', 'S', 'F', '7.0', '1'], ['0', 'W', 'Y', '9.0', '1'], ['0', 'H', 'D', '8.0', '1'], ['0', 'M', 'E', '8.5', '1'], ['1', 'N', 'P', '5.0', '1'], ['0', 'K', 'S', '7.5', '1'], ['0', 'H', 'L', '9.5', '1'], ['0', 'I', 'I', '9.5', '1'], ['1', 'A', 'Q', '9.0', '1'], ['1', 'V', 'A', '9.0', '1'], ['0', 'K', 'N', '5.0', '1'], ['0', 'P', 'V', '5.5', '1'], ['0', 'G', 'L', '5.5', '1'], ['1', 'I', 'G', '7.0', '1'], ['0', 'A', 'E', '3.5', '1'], ['1', 'N', 'A', '7.0', '1'], ['1', 'T', 'G', '8.5', '1'], ['0', 'E', 'T', '6.5', '1'], ['1', 'D', 'P', '6.0', '1'], ['0', 'S', 'H', '4.5', '1'], ['0', 'S', 'K', '4.5', '1'], ['0', 'F', 'L', '2.0', '1'], ['0', 'K', 'I', '1.5', '1'], ['0', 'L', 'S', '2.0', '0'], ['0', 'G', 'D', '7.5', '0'], ['0', 'P', 'Y', '9.0', '0'], ['0', 'C', 'E', '6.5', '0'], ['0', 'K', 'D', '7.0', '0'], ['0', 'A', 'Q', '2.0', '0'], ['0', 'E', 'V', '3.0', '0'], ['0', 'H', 'C', '8.0', '0'], ['0', 'D', 'E', '2.0', '0'], ['0', 'A', 'T', '3.5', '0'], ['0', 'K', 'W', '6.0', '0'], ['0', 'N', 'V', '6.5', '0'], ['9.33333333333333', 'N', 'A', '7.5', '0'], ['0', 'P', 'P', '8.5', '0'], ['0', 'T', 'F', '9.0', '0'], ['0', 'H', 'S', '7.0', '0'], ['0', 'E', 'M', '8.5', '0'], ['9', 'M', 'Y', '11.0', '0'], ['0', 'D', 'N', '9.5', '1'], ['9', 'F', 'T', '11.0', '1'], ['0', 'L', 'V', '8.0', '0'], ['0', 'P', 'V', '7.5', '0'], ['0', 'W', 'G', '8.5', '0'], ['0', 'K', 'E', '7.5', '0'], ['0', 'G', 'Y', '8.0', '0'], ['7.33333333333333', 'L', 'H', '7.0', '0'], ['0', 'V', 'C', '11.0', '0'], ['9.33333333333333', 'S', 'N', '5.0', '0'], ['8.66666666666667', 'G', 'L', '7.5', '0'], ['0', 'C', 'C', '11.0', '0'], ['0', 'Y', 'L', '9.5', '0'], ['0', 'L', 'Y', '8.0', '0'], ['0', 'E', 'R', '6.5', '0'], ['0', 'P', 'T', '7.0', '0'], ['0', 'L', 'S', '6.5', '0'], ['0', 'K', 'E', '8.5', '0'], ['0', 'L', 'Y', '11.0', '0'], ['0', 'A', 'L', '11.0', '0'], ['9', 'G', 'V', '9.5', '0'], ['0', 'F', 'D', '11.0', '0'], ['0', 'G', 'L', '8.5', '0'], ['8.66666666666667', 'H', 'T', '11.0', '0'], ['0', 'V', 'H', '8.0', '0'], ['0', 'G', 'T', '9.0', '0'], ['0', 'Y', 'Y', '8.5', '0'], ['0', 'I', 'Q', '10.0', '0'], ['0', 'V', 'C', '8.5', '0'], ['0', 'A', 'L', '11.0', '0'], ['9', 'V', 'R', '10.0', '0'], ['0', 'C', 'G', '10.5', '0'], ['0', 'G', 'L', '8.0', '0'], ['8.66666666666667', 'G', 'F', '6.0', '0'], ['9', 'D', 'T', '7.5', '0'], ['0', 'C', 'G', '11.0', '0'], ['8.66666666666667', 'Q', 'E', '11.0', '0'], ['0', 'I', 'T', '8.0', '0'], ['0', 'E', 'A', '11.0', '0'], ['0', 'T', 'G', '6.5', '0'], ['0', 'I', 'F', '7.0', '0'], ['9', 'E', 'F', '10.0', '0'], ['0', 'H', 'L', '8.5', '0'], ['0', 'W', 'G', '8.5', '0'], ['0', 'N', 'F', '8.5', '1'], ['0', 'S', 'T', '8.5', '0'], ['0', 'S', 'Y', '5.5', '0'], ['0', 'I', 'F', '9.0', '0'], ['0', 'P', 'L', '8.0', '0'], ['0', 'F', 'L', '9.0', '0'], ['0', 'T', 'S', '10.0', '0'], ['0', 'G', 'M', '11.0', '0'], ['0', 'T', 'L', '8.5', '0'], ['0', 'E', 'V', '7.5', '0'], ['0', 'P', 'D', '10.0', '0'], ['0', 'Q', 'L', '8.5', '0'], ['0', 'G', 'W', '5.0', '0'], ['0', 'E', 'N', '5.5', '0'], ['0', 'D', 'H', '7.0', '0'], ['8.66666666666667', 'Y', 'F', '5.5', '0'], ['0', 'L', 'R', '10.0', '0'], ['7.33333333333333', 'K', 'S', '7.5', '0'], ['0', 'R', 'L', '6.5', '0'], ['0', 'S', 'S', '7.0', '0'], ['0', 'G', 'L', '11.0', '0'], ['0', 'V', 'T', '11.0', '0'], ['0', 'A', 'A', '10.0', '0'], ['0', 'L', 'Y', '11.0', '0'], ['0', 'G', 'R', '11.0', '0'], ['0', 'L', 'Y', '8.5', '0'], ['0', 'E', 'R', '5.5', '0']];
+			var xScale = d3.scale.linear().domain([0,dataset_score.length]).range([padding,w-padding]);
+
+			var yScale = d3.scale.linear().domain([0,d3.max(dataset_score,function (d,i) {return parseFloat(dataset_score[i][0]);})]).range([h-padding,padding]);
+
+			var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0).tickFormat(d3.format("d"));
+
+			var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(10);
+
+			var text_position = ["right","middle","left"];
+
+			var colors = {"0":"255,247,251","1":"255,247,251","2":"236,231,242","3":"208,209,230","4":"166,189,219","5":"116,169,207","6":"54,144,192","7":"5,112,176","8":"4,90,141","9":"2,56,88"};
+
+			var circlecount = dataset_score.length;
+
+			var mastercoordinates = [ ];
+
+			var toggle = svg.append("text").text("toggle").attr("class","text5").attr("text-anchor","middle").attr("x",(w-padding-35)).attr("y",(h-0.8*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var text3 = svg.append("text").text("on").attr("class","text3").attr("text-anchor","middle").attr("x",(w-padding)).attr("y",(h-0.8*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var text4 = svg.append("text").text("off").attr("class","text4").attr("text-anchor","middle").attr("x",(w-padding+12)).attr("y",(h-0.8*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","hidden");
+
+			var remove_background = svg.append("text").text("remove background").attr("class","text8").attr("text-anchor","middle").attr("x",(w-padding-35)).attr("y",(h-0.7*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var polar = svg.append("text").text("polar").attr("class","polar").attr("text-anchor","middle").attr("x",padding+(w-2*padding)/4+0*(w-2*padding)/10).attr("y",(h-0.7*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var non_polar = svg.append("text").text("non-polar").attr("class","nonpolar").attr("text-anchor","middle").attr("x",padding+(w-2*padding)/4+1*(w-2*padding)/10).attr("y",(h-0.7*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var positive = svg.append("text").text("positive").attr("class","positive").attr("text-anchor","middle").attr("x",padding+(w-2*padding)/4+2*(w-2*padding)/10).attr("y",(h-0.7*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var negative = svg.append("text").text("negative").attr("class","negative").attr("text-anchor","middle").attr("x",padding+(w-2*padding)/4+3*(w-2*padding)/10).attr("y",(h-0.7*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var aromatic = svg.append("text").text("aromatic").attr("class","aromatic").attr("text-anchor","middle").attr("x",padding+(w-2*padding)/4+4*(w-2*padding)/10).attr("y",(h-0.7*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var show_all = svg.append("text").text("show all").attr("class","show_all").attr("text-anchor","middle").attr("x",padding +(w-2*padding)/2).attr("y",(h-0.6*padding)).attr("font-family","sans-serif").attr("font-size","10px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var x_label = svg.append("text").text("residues").attr("class","text6").attr("text-anchor","middle").attr("x",padding +(w-2*padding)/2).attr("y",(h-0.85*padding)).attr("font-family","sans-serif").attr("font-size","20px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var y_label = svg.append("text").text("weight score").attr("class","text7").attr("text-anchor","middle").attr("x",(padding)).attr("y",(h)/2).attr("font-family","sans-serif").attr("font-size","20px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",1.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+			var total_bar_width = (w-2*padding)/(dataset_score.length);
+
+			var bar_padding = total_bar_width/6;
+
+			var bar_width = 5*total_bar_width/6;
+
+			var heights = [];
+
+			var aminoacids = {"A":["Alanine","Nonpolar"],"R":["Arginine","Positive"],"N":["Asparagine","Polar"],"D":["Aspartic Acid","Negative"],"C":["Cysteine","Polar"],"Q":["Glutamine","Polar"],"E":["Glutamic Acid","Negative"],"G":["Glycine","Nonpolar"],"H":["Histidine","Positive"],"I":["Isoleucine","Nonpolar"],"L":["Leucine","Nonpolar"],"K":["Lysine","Positive"],"M":["Methionine","Nonpolar"],"F":["Phenlyalanine","Aromatic"],"P":["Proline","Polar"],"S":["Serine","Polar"],"T":["Threonine","Polar"],"W":["Tryptophan","Aromatic"],"Y":["Tyrosine","Aromatic"],"V":["Valine","Nonpolar"]};
+
+			var textlabels = [];
+
+			
+
+			d3.select("body").style("background-color", "black");
+
+			
+
+			svg.selectAll("rect")
+
+				.data(dataset_score)
+
+				.enter()
+
+				.append("rect")
+
+				.attr("x", function (d,i) {
+
+					var coordinates = [];
+
+					//coordinates.push(padding+bar_width/2+i*(total_bar_width));
+
+					coordinates.push(padding+i*(total_bar_width));
+
+					mastercoordinates.push(coordinates[0]);
+
+					return coordinates[0];
+
+					}
+
+				)
+
+				.attr("y", function (d,i) {
+
+					var coordinatesy = [];
+
+					coordinatesy.push(yScale(dataset_score[i][0]));
+
+					mastercoordinates.push(coordinatesy[0]);
+
+					return coordinatesy[0];
+
+					}
+
+				)
+
+				.attr("height", function (d,i) {
+
+					//return (Math.round(((dataset3[i]-0)/(100-0))*(h-2*padding)));
+
+					heights.push((h-mastercoordinates[i+circlecount]-padding));
+
+					return (h-mastercoordinates[i+circlecount]-padding);
+
+					}
+
+				)
+
+				.attr ("width", function (d,i) {
+
+					 //return(w-2*padding)/circlecount;
+
+					 return bar_width;
+
+					 }
+
+				)
+
+				.attr("fill", function (d,i) {
+
+					if (d3.min(dataset_score,function (d,i) {return parseFloat(dataset_score[i][3]);}) == d3.max(dataset_score,function (d,i) {return parseFloat(dataset_score[i][3]);})) {
+
+						return "rgb"+"("+colors[8]+")";
+
+					} else {
+
+						return "rgb"+"("+colors[Math.round((parseFloat(dataset_score[i][3]) - d3.min(dataset_score,function (d,i) {return parseFloat(dataset_score[i][3]);}))*8/(d3.max(dataset_score,function (d,i) {return parseFloat(dataset_score[i][3]);}) - d3.min(dataset_score,function (d,i) {return parseFloat(dataset_score[i][3]);})))]+")";
+
+					}
+
+					}
+
+				)
+
+				.attr("fill-opacity", function (d,i) {
+
+					//return(0.2+0.8*(dataset_score[i][3]/11));
+
+					return 1;
+
+				}
+
+				)
+
+				.attr("stroke",function (d,i) {
+
+					return "rgba("+colors[9]+","+(1)+")";
+
+					}
+
+				)
+
+				.attr("stroke-width", function (d,i) {
+
+					return 0;
+
+					}
+
+				)
+
+				.attr("class","rectangles")
+
+				.on("mouseover",function(d,i) { svg.append("text").text(dataset_score[i][1]+","+dataset_score[i][2]).attr("class","text").attr("text-anchor","middle").attr("x",mastercoordinates[i]+bar_width/2).attr("y",mastercoordinates[i+circlecount]-50).attr("font-family","sans-serif").attr("font-size","25px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",0.75).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+					d3.select(this).transition().attr("stroke",function () { return "rgb"+"(230,85,13)";}).attr("stroke-opacity",1).attr("stroke-width",6).duration(500);
+
+					svg.append("text").text(aminoacids[dataset_score[i][1]][0]+" "+(2*i+1)+" and "+aminoacids[dataset_score[i][2]][0]+" "+(2*i+2)).attr("class","text2").attr("text-anchor","middle").attr("x",padding+(w-2*padding)/2).attr("y",padding/2).attr("font-family","sans-serif").attr("font-size","40px").attr("fill","gray").attr("stroke","gray").attr("fill-opacity",0.0).attr("stroke-opacity",0.0).attr("visibility","visible");
+
+					d3.select(".text2").transition().attr("fill-opacity",0.9).delay(500).duration(500);
+
+				}
+
+				)
+
+				.on("mouseout",function(d,i) { svg.select(".text").remove();
+
+					svg.select(".text2").remove();
+
+					d3.select(this).transition().attr("stroke",function () { return "rgba("+colors[9]+","+(1)+")";}).attr("stroke-opacity",1).attr("stroke-width",0).duration(150);
+
+				}
+
+				);
+
+
+
+			
+
+			
+
+			svg.selectAll("rect_domain")
+
+				.data(dataset_score)
+
+				.enter()
+
+				.append("rect")
+
+				.attr("x", function (d,i) {
+
+					return mastercoordinates[i]-bar_padding/2;
+
+					}
+
+				)
+
+				.attr("y", function (d,i) {
+
+					if (dataset_score[i][4] == 0) {
+
+						return h-padding-(h-2*padding)/60;
+
+					} else {
+
+						return h-padding-2*(h-2*padding)/60;
+
+					}
+
+					}
+
+				)
+
+				.attr("height", function (d,i) {
+
+					if (dataset_score[i][4] == 0) {
+
+						return 2*(h-2*padding)/60;
+
+					} else {
+
+						return 4*(h-2*padding)/60;
+
+					}
+
+					}
+
+				)
+
+				.attr ("width", function (d,i) {
+
+					 return total_bar_width;
+
+					 }
+
+				)
+
+				.attr("fill", function (d,i) {
+
+					if (dataset_score[i][4] == 0) {
+
+						return "cyan";
+
+					} else {
+
+						return "magenta";
+
+					}
+
+					}
+
+				)
+
+				.attr("fill-opacity", function (d,i) {
+
+					return 1;
+
+				}
+
+				)
+
+				.attr("stroke",function (d,i) {
+
+					return "rgba("+colors[9]+","+(1)+")";
+
+					}
+
+				)
+
+				.attr("stroke-width", function (d,i) {
+
+					return 0;
+
+					}
+
+				)
+
+				.attr("class","domain_rectangles");
+
+			
+
+			
+
+			
+
+			
+
+			svg.selectAll("text-toggle")
+
+				.data(dataset_score)
+
+				.enter()
+
+				.append("text")
+
+				.text(function (d,i) {
+
+					textlabels.push(dataset_score[i][1]+","+dataset_score[i][2]);
+
+					return (dataset_score[i][1]+","+dataset_score[i][2]);
+
+					}
+
+				)
+
+				.attr("text-anchor",function (d,i) {
+
+					return text_position[1];
+
+					}
+
+				)
+
+				.attr("x", function (d,i) {
+
+					var x = i;
+
+					return (mastercoordinates[x]+bar_width/2);
+
+					}
+
+				)
+
+				.attr("y", function (d,i) {
+
+					var y = i+circlecount;
+
+					return (mastercoordinates[y]-heights[i]/5);
+
+					}
+
+				)
+
+				.attr("class","mastertext")
+
+				.attr("font-family","sans-serif")
+
+				.attr("font-size",function (d,i) {
+
+					//var length = 2*radii[i];
+
+					var length = 10;
+
+					return length+"px";
+
+					}
+
+				)
+
+				.attr("fill","white")
+
+				.attr("stroke","white")
+
+				.attr("fill-opacity", 0.4)
+
+				.attr("stroke-opacity", 0.0)
+
+				.attr("visibility","hidden");
+
+				
+
+			toggle;
+
+			x_label;
+
+			y_label.attr("transform", function () {
+
+			return "translate("+(padding-h/2-padding/6)+","+(h/2+padding)+")"+" rotate(-90)"}
+
+			);
+
+			
+
+			
+
+			text3
+
+			.on("click",function () {
+
+			d3.selectAll(".mastertext").transition().attr("visibility","visible").duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			svg.select(".text3").transition().attr("visibility","hidden").duration(500);
+
+			svg.select(".text4").transition().attr("visibility","visible").duration(500);
+
+			}
+
+			)
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			text4
+
+			.on("click",function() {
+
+			d3.selectAll(".mastertext").transition().attr("visibility","hidden").duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			svg.select(".text4").transition().attr("visibility","hidden").duration(500);
+
+			svg.select(".text3").transition().attr("visibility","visible").duration(500);
+
+			}
+
+			)
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","white").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			
+
+			show_all
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			)
+
+			.on("click",function () {
+
+			d3.selectAll(".rectangles").data(dataset_score).transition().attr("height", function (d,i) {
+
+				return heights[i];
+
+			}).duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			
+
+			remove_background
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			)
+
+			.on("click",function () {
+
+			d3.selectAll(".rectangles").data(dataset_score).transition().attr("height", function (d,i) {
+
+				if (dataset_score[i][4] == 1) {
+
+					return heights[i];
+
+				} else {
+
+					return 0;
+
+				}
+
+			}).duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			
+
+			
+
+			polar
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			)
+
+			.on("click",function () {
+
+			d3.selectAll(".rectangles").data(dataset_score).transition().attr("height", function (d,i) {
+
+				if (aminoacids[dataset_score[i][1]][1] == "Polar" || aminoacids[dataset_score[i][2]][1] == "Polar") {
+
+					return heights[i];
+
+				} else {
+
+					return 0;
+
+				}
+
+			}).duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			
+
+			
+
+			
+
+			non_polar
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			)
+
+			.on("click",function () {
+
+			d3.selectAll(".rectangles").data(dataset_score).transition().attr("height", function (d,i) {
+
+				if (aminoacids[dataset_score[i][1]][1] == "Nonpolar" || aminoacids[dataset_score[i][2]][1] == "Nonpolar") {
+
+					return heights[i];
+
+				} else {
+
+					return 0;
+
+				}
+
+			}).duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			
+
+			
+
+			positive
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			)
+
+			.on("click",function () {
+
+			d3.selectAll(".rectangles").data(dataset_score).transition().attr("height", function (d,i) {
+
+				if (aminoacids[dataset_score[i][1]][1] == "Positive" || aminoacids[dataset_score[i][2]][1] == "Positive") {
+
+					return heights[i];
+
+				} else {
+
+					return 0;
+
+				}
+
+			}).duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			negative
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			)
+
+			.on("click",function () {
+
+			d3.selectAll(".rectangles").data(dataset_score).transition().attr("height", function (d,i) {
+
+				if (aminoacids[dataset_score[i][1]][1] == "Negative" || aminoacids[dataset_score[i][2]][1] == "Negative") {
+
+					return heights[i];
+
+				} else {
+
+					return 0;
+
+				}
+
+			}).duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			
+
+			
+
+			
+
+			aromatic
+
+			.on("mouseover", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","30px").duration(500);
+
+			}
+
+			)
+
+			.on("mouseout", function() {
+
+			d3.select(this).transition().attr("fill","gray").duration(250);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			)
+
+			.on("click",function () {
+
+			d3.selectAll(".rectangles").data(dataset_score).transition().attr("height", function (d,i) {
+
+				if (aminoacids[dataset_score[i][1]][1] == "Aromatic" || aminoacids[dataset_score[i][2]][1] == "Aromatic") {
+
+					return heights[i];
+
+				} else {
+
+					return 0;
+
+				}
+
+			}).duration(500);
+
+			d3.select(this).transition().attr("font-size","10px").duration(250);
+
+			}
+
+			);
+
+			
+
+			
+
+			
+
+			
+
+			svg.append("g")
+
+				.attr("class","axis")
+
+				.attr("transform", "translate(0," + (h - padding) + ")")
+
+				.call(xAxis);
+
+			
+
+			svg.append("g")
+
+				.attr("class","axis")
+
+				.attr("transform", "translate("+padding+"," +"0)")
+
+				.call(yAxis);
+
+        </script>
+
+    </body>
+
+</html> 
